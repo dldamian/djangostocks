@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Eliminar Stock</h1>
+
+{% if item %}
+
+    {% for x in item %}
+        {{x}} - <a href="{% url 'eliminar' x.id %}" class="btn btn-primary">Eliminar</a><br>
+
+    {% endfor %}
+
+{% else %}
+    <p>No tienes stocks...</p>
+
+{% endif %}
+
+{% endblock %}

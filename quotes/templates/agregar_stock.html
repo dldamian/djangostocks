@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<h1>Agregar Stock</h1>
+<br>
+
+<form action="{% url 'agregar_stock' %}" method="POST" class="form-inline my-2 my-lg-0"> {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Agregar compañía" aria-label="Search" name="ticker">
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Agregar</button>
+</form>
+<br>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Compañía</th>
+        <th scope="col">Stock Price</th>
+        <th scope="col">Previous Close</th>
+        <th scope="col">Valor</th>
+        <th scope="col">YTD Change</th>
+        <th scope="col">52W High</th>
+        <th scope="col">52W Low</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if ticker %}
+        
+
+        
+            {% for dato in salida %}
+            <tr>
+                <th scope="row">{{dato.companyName}}</th>
+                <td>${{dato.latestPrice}}</td>
+                <td>${{dato.previousClose}}</td>
+                <td>${{dato.marketCap|intcomma}}</td>
+                <td>{{dato.ytdChange}}%</td>
+                <td>${{dato.week52High}}</td>
+                <td>${{dato.week52Low}}</td>
+            </tr>
+            {% endfor %}
+        
+    {% endif %}
+    </tbody>
+  </table>
+  
+  
+<br>
+
+
+
+
+{% endblock %}
